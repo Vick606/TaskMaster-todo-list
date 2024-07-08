@@ -2,47 +2,47 @@ import { format } from 'date-fns';
 import { Todo } from '../modules/Todo';
 
 export function renderTodos(todos) {
-    const todoList = document.getElementById('todo-list');
-    todoList.innerHTML = '';
-  
-    todos.forEach((todo) => {
-      const li = document.createElement('li');
-      li.classList.add('todo-item');
-      li.dataset.id = todo.id;
-  
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = todo.completed;
-      checkbox.classList.add('todo-checkbox');
-  
-      const title = document.createElement('span');
-      title.innerHTML = `<i class="fas fa-tasks icon"></i>${todo.title}`;
-      title.classList.add('todo-title');
-      if (todo.completed) {
-        title.classList.add('completed');
-      }
-  
-      const dueDate = document.createElement('span');
-      dueDate.innerHTML = `<i class="far fa-calendar-alt icon"></i>${todo.formatDueDate()}`;
-      dueDate.classList.add('todo-due-date');
-  
-      const priority = document.createElement('span');
-      priority.innerHTML = `<i class="fas fa-flag icon priority-${todo.priority.toLowerCase()}"></i>${todo.priority}`;
-      priority.classList.add('todo-priority', `priority-${todo.priority.toLowerCase()}`);
-  
-      const deleteBtn = document.createElement('button');
-      deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
-      deleteBtn.classList.add('delete-todo');
-  
-      li.appendChild(checkbox);
-      li.appendChild(title);
-      li.appendChild(dueDate);
-      li.appendChild(priority);
-      li.appendChild(deleteBtn);
-  
-      todoList.appendChild(li);
-    });
-  }
+  const todoList = document.getElementById('todo-list');
+  todoList.innerHTML = '';
+
+  todos.forEach((todo) => {
+    const li = document.createElement('li');
+    li.classList.add('todo-item');
+    li.dataset.id = todo.id;
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = todo.completed;
+    checkbox.classList.add('todo-checkbox');
+
+    const title = document.createElement('span');
+    title.textContent = todo.title;
+    title.classList.add('todo-title');
+    if (todo.completed) {
+      title.classList.add('completed');
+    }
+
+    const dueDate = document.createElement('span');
+    dueDate.textContent = todo.formatDueDate();
+    dueDate.classList.add('todo-due-date');
+
+    const priority = document.createElement('span');
+    priority.textContent = todo.priority;
+    priority.classList.add('todo-priority', `priority-${todo.priority.toLowerCase()}`);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    deleteBtn.classList.add('delete-todo');
+
+    li.appendChild(checkbox);
+    li.appendChild(title);
+    li.appendChild(dueDate);
+    li.appendChild(priority);
+    li.appendChild(deleteBtn);
+
+    todoList.appendChild(li);
+  });
+}
 
 export function bindTodoEvents(todoList, renderTodos) {
   const todoListElement = document.getElementById('todo-list');
