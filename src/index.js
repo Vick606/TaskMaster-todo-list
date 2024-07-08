@@ -3,8 +3,11 @@ import { TodoList } from './modules/TodoList';
 import { Todo } from './modules/Todo';
 import { renderProjects, bindProjectEvents } from './views/projectView';
 import { renderTodos, bindTodoEvents } from './views/todoView';
+import { format } from 'date-fns';
 
 const todoList = new TodoList();
+const currentDateElement = document.getElementById('current-date');
+currentDateElement.textContent = format(new Date(), 'MMMM d, yyyy');
 
 // Initial render
 renderProjects(todoList.getAllProjects(), todoList.getCurrentProject().id);
