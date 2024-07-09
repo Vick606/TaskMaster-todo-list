@@ -3,37 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskMaster: Todo List</title>
+    <title>TaskMaster: Your Personal Todo List App</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
+        <header class="app-header">
+            <h1><i class="fas fa-tasks"></i> TaskMaster</h1>
+            <p class="tagline">Organize your life, one task at a time</p>
+        </header>
+
         <aside class="sidebar">
-            <h2>Projects</h2>
-            <button id="add-project-btn" class="add-project-btn"><i class="fas fa-folder-plus"></i> Add Project</button>
+            <h2><i class="fas fa-folder"></i> Projects</h2>
+            <button id="add-project-btn" class="add-project-btn"><i class="fas fa-folder-plus"></i> New Project</button>
             <ul id="project-list" class="project-list"></ul>
-            <form id="add-project-form" style="display: none;">
+            <form id="add-project-form" class="add-form" style="display: none;">
                 <input type="text" id="new-project-name" placeholder="Project name" required>
                 <input type="color" id="new-project-color" value="#0080ff">
-                <button type="submit">Add Project</button>
+                <button type="submit" class="submit-btn">Create Project</button>
             </form>
         </aside>
         
         <main class="main-content">
-            <h1>TaskMaster</h1>
-            <div id="current-date" class="current-date"></div>
-            <button id="add-todo-btn" class="add-todo-btn"><i class="fas fa-plus"></i> Add Todo</button>
+            <div class="main-header">
+                <div id="current-date" class="current-date"></div>
+                <button id="add-todo-btn" class="add-todo-btn"><i class="fas fa-plus"></i> New Task</button>
+            </div>
             <ul id="todo-list" class="todo-list"></ul>
-            <form id="add-todo-form" style="display: none;">
-                <input type="text" id="new-todo-title" placeholder="Todo title" required>
+            <form id="add-todo-form" class="add-form" style="display: none;">
+                <input type="text" id="new-todo-title" placeholder="Task title" required>
                 <textarea id="new-todo-description" placeholder="Description"></textarea>
-                <input type="date" id="new-todo-due-date" required>
-                <select id="new-todo-priority" required>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
-                <button type="submit">Add Todo</button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="new-todo-due-date">Due Date:</label>
+                        <input type="date" id="new-todo-due-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-todo-priority">Priority:</label>
+                        <select id="new-todo-priority" required>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Add Task</button>
             </form>
         </main>
     </div>
@@ -42,8 +57,10 @@
         <div class="modal-content" id="todo-details-content"></div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Made with <span class="heart">❤</span> Vickoch20</p>
+    <footer class="app-footer">
+        <p>&copy; 2024 TaskMaster | Made with <span class="heart">❤</span> by Vickoch20</p>
     </footer>
+
+    <script src="app.js"></script>
 </body>
 </html>

@@ -17,21 +17,17 @@ renderTodos(todoList.getCurrentProject().getTodos());
 bindProjectEvents(todoList, renderTodos);
 bindTodoEvents(todoList, renderTodos);
 
-const addTodoBtn = document.createElement('button');
-addTodoBtn.innerHTML = '<i class="fas fa-plus"></i> Add Todo';
-addTodoBtn.classList.add('add-todo-btn');
+// Add Todo button functionality
+const addTodoBtn = document.getElementById('add-todo-btn');
 addTodoBtn.addEventListener('click', () => {
   document.getElementById('add-todo-form').style.display = 'block';
 });
-document.querySelector('.main-content').prepend(addTodoBtn);
 
-const addProjectBtn = document.createElement('button');
-addProjectBtn.innerHTML = '<i class="fas fa-folder-plus"></i> Add Project';
-addProjectBtn.classList.add('add-project-btn');
+// Add Project button functionality
+const addProjectBtn = document.getElementById('add-project-btn');
 addProjectBtn.addEventListener('click', () => {
   document.getElementById('add-project-form').style.display = 'block';
 });
-document.querySelector('.sidebar').prepend(addProjectBtn);
 
 // Add sample todos if the list is empty
 if (todoList.getAllTodos().length === 0) {
@@ -44,6 +40,36 @@ if (todoList.getAllTodos().length === 0) {
   sampleTodos.forEach(todo => todoList.addTodo(todo));
   renderTodos(todoList.getCurrentProject().getTodos());
 }
+
+// Form submission handlers
+const addTodoForm = document.getElementById('add-todo-form');
+addTodoForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const title = document.getElementById('new-todo-title').value;
+  const description = document.getElementById('new-todo-description').value;
+  const dueDate = document.getElementById('new-todo-due-date').value;
+  const priority = document.getElementById('new-todo-priority').value;
+  
+  const newTodo = new Todo(title, description, dueDate, priority, todoList.getCurrentProject().id);
+  todoList.addTodo(newTodo);
+  renderTodos(todoList.getCurrentProject().getTodos());
+  
+  addTodoForm.reset();
+  addTodoForm.style.display = 'none';
+});
+
+const addProjectForm = document.getElementById('add-project-form');
+addProjectForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('new-project-name').value;
+  const color = document.getElementById('new-project-color').value;
+  
+  todoList.addProject(name, color);
+  renderProjects(todoList.getAllProjects(), todoList.getCurrentProject().id);
+  
+  addProjectForm.reset();
+  addProjectForm.style.display = 'none';
+});
 
 // Save data when the user leaves the page
 window.addEventListener('beforeunload', () => {
